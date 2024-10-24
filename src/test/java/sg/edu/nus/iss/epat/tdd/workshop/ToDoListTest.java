@@ -11,8 +11,19 @@ import static org.junit.Assert.fail;
 
 public class ToDoListTest  {
     // Define Test Fixtures
-    private HashMap<String, Task> testTasks = new HashMap<>();
     private ToDoList ToDoListTestList;
+    private Task task1;
+
+    private String DESC1 = "Hello 1";
+    private Boolean STATUS1 = false;
+
+    private Task task2;
+    private String DESC2 = "Hello 3";
+    private Boolean STATUS2 = true;
+
+    private Task task3;
+    private String DESC3 = "Hello 3";
+    private Boolean STATUS3 = true;
 
     public ToDoListTest() {
         super();
@@ -22,6 +33,10 @@ public class ToDoListTest  {
     public void setUp() throws Exception {
         // Initialise Test Fixtures
         ToDoListTestList = new ToDoList();
+        task1 = new Task(DESC1, STATUS1);
+        task2 = new Task(DESC2, STATUS2);
+        task3 = new Task(DESC3, STATUS3);
+        
     }
 
     @After
@@ -32,23 +47,29 @@ public class ToDoListTest  {
 
     @Test
     public void testAddTask() {
-        Task testAdd1 = new Task("task3", false);
-        ToDoListTestList.addTask(testAdd1);
+        ToDoListTestList.addTask(task1);
         assertEquals(1,ToDoListTestList.getAllTasks().size());
     }
 
     @Test
     public void testGetStatus() {
-        fail("Not implemented yet");
+        ToDoListTestList.addTask(task1);
+        assertEquals(STATUS1, ToDoListTestList.getStatus(DESC1));
     }
 
     @Test
     public void testRemoveTask() {
-        fail("Not implemented yet");
+        ToDoListTestList.addTask(task1);
+        ToDoListTestList.removeTask(DESC1);
+        assertEquals(0,ToDoListTestList.getAllTasks().size());
     }
 
     @Test
     public void testGetCompletedTasks() {
-        fail("Not implemented yet");
+        ToDoListTestList.addTask(task1);
+        ToDoListTestList.addTask(task2);
+        ToDoListTestList.addTask(task3);
+        assertEquals(1, ToDoListTestList.getCompletedTasks().size());
+
     }
 }
