@@ -4,31 +4,31 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class ToDoList {
-   private HashMap<String, Task> tasks = new HashMap<String, Task>();
+   private HashMap<String, Task> tasks = new HashMap<>();
 
    public void addTask(Task task) {
-      // Add code here
-      tasks.put(task.getDescription(), task);
+      this.tasks.put(task.getDescription(), task);
    }
 
    public void completeTask(String description) {
-      // Add code here
+      Task target = this.tasks.get(description);
+      target.setComplete(true);
+      this.tasks.replace(target.getDescription(), target);
    }
 
    public boolean getStatus(String description) {
       // Add code here
-      return tasks.get(description).isComplete();
+      return this.tasks.get(description).isComplete();
    }
 
    public Task getTask(String description) {
       // Add code here
-      return null;
+      return this.tasks.get(description);
    }
 
    public Task removeTask(String description) {
       // Add code here
-      tasks.remove(description);
-      return null;
+       return this.tasks.remove(description);
    }
 
    public Collection<Task> getAllTasks() {
@@ -37,14 +37,14 @@ public class ToDoList {
 
    public Collection<Task> getCompletedTasks() {
       // Add code here
-      Collection <Task> completedTasks = new ArrayList<>();
-
-      for (Task task: tasks.values()){
-         if (task.isComplete()){
-            completedTasks.add(task);
+      Collection<Task> results = new ArrayList<>();
+      for (Task task : this.getAllTasks())
+      {
+         if (task.isComplete())
+         {
+            results.add(task);
          }
       }
-
-      return completedTasks;
+      return results;
    }
 }
